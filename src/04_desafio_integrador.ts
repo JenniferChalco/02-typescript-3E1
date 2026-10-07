@@ -16,6 +16,7 @@
  * 3. Ejecuta en tu terminal: `pnpm run start:04` para verificar los tests y
  *    ver tu ticket digital impreso en pantalla.
  */
+/// <reference lib="dom" />
 
 // ============================================================================
 // 1. Modelos e Interfaces de la App Móvil
@@ -70,12 +71,21 @@ export interface ResumenFinanciero {
  * Todos los valores numéricos deben retornar redondeados a 2 decimales: Number(val.toFixed(2)).
  */
 export function calcularTotalesPedido(pedido: PedidoMovil): ResumenFinanciero {
-  // 👇 TODO: Escribe tu lógica de cálculo aquí y reemplaza el objeto por defecto:
+ const subtotal = pedido.detalles.reduce(
+    (acc, item) => acc + item.producto.precioUnitario * item.cantidad,
+    0
+  );
+
+  const descuentoEstudiantil = subtotal >= 10.0 ? subtotal * 0.1 : 0;
+  const baseImponible = subtotal - descuentoEstudiantil;
+  const iva15 = baseImponible * 0.15;
+  const totalPagar = baseImponible + iva15;
+
   return {
-    subtotal: 0,
-    descuentoEstudiantil: 0,
-    iva15: 0,
-    totalPagar: 0
+    subtotal: Number(subtotal.toFixed(2)),
+    descuentoEstudiantil: Number(descuentoEstudiantil.toFixed(2)),
+    iva15: Number(iva15.toFixed(2)),
+    totalPagar: Number(totalPagar.toFixed(2))
   };
 }
 
