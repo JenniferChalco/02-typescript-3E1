@@ -26,10 +26,10 @@
 // - `promedioObjetivo` (number): Debe ser un número decimal (ej. 9.85).
 // - `estaMatriculado` (boolean): Debe ser true.
 
-export const nombreEstudiante: string = "";       // 👈 TODO: Escribe tu nombre aquí
-export const edadEstudiante: number = 0;          // 👈 TODO: Escribe tu edad aquí
-export const promedioObjetivo: number = 0;        // 👈 TODO: Escribe tu promedio objetivo
-export let estaMatriculado: boolean = false;    // 👈 TODO: Cambia a true
+export const nombreEstudiante: string = "Jennifer Chalco";       
+export const edadEstudiante: number = 17;        
+export const promedioObjetivo: number = 9.85;      
+export let estaMatriculado: boolean = true;  
 
 /**
  * TODO: Implementa la función `obtenerResumenPersonal` usando Template Strings (${...}).
@@ -37,7 +37,8 @@ export let estaMatriculado: boolean = false;    // 👈 TODO: Cambia a true
  * `👤 Estudiante: NOMBRE | 🎂 Edad: EDAD años | 🎯 Meta: PROMEDIO/10 | 📋 Estado: MATRICULADO` (o NO_MATRICULADO si es false)
  */
 export function obtenerResumenPersonal(): string {
-  // 👇 TODO: Escribe tu lógica aquí y reemplaza el return "":
+   const estado = estaMatriculado ? "Matriculado" : "No Matriculado"
+   return `👤 Estudiante: ${nombreEstudiante} | 🎂 Edad: ${edadEstudiante} años | 🎯 Meta: ${promedioObjetivo}/10 | 📋 Estado: ${estado}`;
   return "";
 }
 
@@ -55,7 +56,11 @@ export function obtenerResumenPersonal(): string {
  */
 export function calcularPromedio(notas: readonly number[]): number {
   // 👇 TODO: Escribe tu lógica aquí y reemplaza el return 0:
+  if (notas.length == 0){
   return 0;
+ }
+  const suma = notas.reduce((acumulado, nota) => acumulado + nota, 0); const promedio = suma / notas.length;
+  return Number(promedio.toFixed(2));
 }
 
 // ============================================================================
@@ -75,9 +80,12 @@ export function calcularPromedio(notas: readonly number[]): number {
 export function formatearFichaEstudiante(
   nombre: string,
   edad: number,
-  paralelo: "E1" | "E2",
+  paralelo: "E1",
   activo: boolean
 ): string {
   // 👇 TODO: Escribe tu lógica aquí y reemplaza el return "":
-  return "";
+  const estado = activo ? "MATRICULADO" : "RETIRADO"
+  const nombreMayus= nombre.toLocaleUpperCase();
+
+  return `[FICHA UETS] ${nombreMayus} (${edad} años) - Paralelo: ${paralelo} - Estado: ${estado}`;
 }
